@@ -8,7 +8,7 @@
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: larger;
     margin-top: 1%;
-    color: red;
+    color: black;
 }
 /* WhatsApp Button */
 .whatsapp-button {
@@ -55,4 +55,26 @@
 
 .whatsapp-button:hover{
     transform: translateY(-2px);
+}
+
+.form {
+    flex: 1; /* Hace que el contenedor ocupe el espacio restante */
+    margin-top: 5% !important; /* Ajusta el margen superior y usa !important para asegurar la aplicación */
+    margin-bottom: 5% !important;    
+    text-align: center;
+    color: white;
+    background-color: rgba(8, 8, 8, 0.9); /* Fondo semitransparente para el formulario */
+    padding: 15px; /* Reduce el espaciado interno del formulario */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para efecto de elevación */
+    width: 80% !important; /* Reduce el ancho del contenedor al 80% del disponible */
+    max-width: 500px !important; /* Ajusta el ancho máximo del formulario */
+    margin-left: auto; /* Centra horizontalmente el contenedor */
+    margin-right: auto; /* Centra horizontalmente el contenedor */
+}
+
+.contact{
+    background-image: url(../IMG/logo.jpeg);
+    background-size: cover;
+    background-position: center;
 }
