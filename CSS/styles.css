@@ -78,3 +78,75 @@
     background-size: cover;
     background-position: center;
 }
+
+/* Contenedor para las cards */
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Estilo de las cards */
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    /* Ancho relativo al contenedor */
+    height: 450px;
+    /* Altura fija para todas las tarjetas */
+    overflow: hidden;
+    /* Evita desbordamientos */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* Sombra para darle un efecto visual */
+}
+
+
+.card-body {
+    text-align: center;
+}
+
+.card .card-image img {
+    width: 100%;
+    /* Ajusta la imagen al ancho de la tarjeta */
+    height: 200px;
+    /* Mantén la proporción de la imagen */
+    object-fit: cover;
+    /* Recorta la imagen si es necesario */
+}
+
+.carousel-item img {
+    width: 100%;
+    /* Ajusta la imagen al ancho de la tarjeta */
+    height: 200px;
+    /* Altura fija para las imágenes */
+    object-fit: cover;
+    /* Recorta la imagen si es más grande, manteniendo el tamaño */
+}
+
+
+.card .card-name {
+    font-size: 24px;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.card .card-stock {
+    text-align: center;
+    font-size: 15px;       
+}
+
+.card .card-button {
+    text-align: center;
+    display: block;
+    margin-top: auto;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+}
