@@ -20,10 +20,10 @@ fetch('../products.json')
 const mapaCategorias = {
     'Alambres': '../PRODUCTS/alambres.html',
     'Electrodos': '../PRODUCTS/electrodos.html',
-    'Herramientas': '../PRODUCTS/herramientas.html',
+    'Herramientas de Mano': '../PRODUCTS/herramientas.html',
     'Soldadoras': '../PRODUCTS/soldadoras.html',
-    'Sopleteria': '../PRODUCTS/sopleteria.html',
-    'Torchas': '../PRODUCTS/torchas.html'
+    'Sopleteria & Reguladores': '../PRODUCTS/sopleteria.html',
+    'Torchas & Respuestos': '../PRODUCTS/torchas.html'
 }
 
 const obtenerUrlCategoria = (categoria) => {
@@ -105,7 +105,7 @@ fetch('../footer.html')
 
     // Solo ejecutar el efecto de escritura si el h1 contiene "CAZ" (página principal)
     let title = document.querySelector('.h1');
-    if(title && !title.textContent.includes('Alambres') && !title.textContent.includes('Electrodos') && !title.textContent.includes('Herramientas') && !title.textContent.includes('Soldadoras') && !title.textContent.includes('Sopleteria') && !title.textContent.includes('Torchas')) {
+    if(title && !title.textContent.includes('Alambres') && !title.textContent.includes('Electrodos') && !title.textContent.includes('Herramientas de mano') && !title.textContent.includes('Soldadoras') && !title.textContent.includes('Sopleteria & Reguladores') && !title.textContent.includes('Torchas & Respuestos')) {
         let text = 'CAZ Insumos Industriales';
         let letterStart = 0;
         let letterEnd = 1;

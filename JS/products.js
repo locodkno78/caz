@@ -3,40 +3,30 @@ const esPagenaProductos = () => {
     return !document.title.includes('Home') && document.querySelector('h1') && 
            (document.title.includes('Alambres') || 
             document.title.includes('Electrodos') || 
-            document.title.includes('Herramientas') || 
+            document.title.includes('Herramientas de Mano') || 
             document.title.includes('Soldadoras') || 
-            document.title.includes('Sopleteria') || 
-            document.title.includes('Torchas') ||
+            document.title.includes('Sopleteria & Reguladores') || 
+            document.title.includes('Torchas & Respuestos') ||
             document.querySelector('h1').textContent.includes('Alambres') ||
             document.querySelector('h1').textContent.includes('Electrodos') ||
-            document.querySelector('h1').textContent.includes('Herramientas') ||
+            document.querySelector('h1').textContent.includes('Herramientas de Mano') ||
             document.querySelector('h1').textContent.includes('Soldadoras') ||
-            document.querySelector('h1').textContent.includes('Sopleteria') ||
-            document.querySelector('h1').textContent.includes('Torchas'))
+            document.querySelector('h1').textContent.includes('Sopleteria & Reguladores') ||
+            document.querySelector('h1').textContent.includes('Torchas & Respuestos'))
 }
-
-console.log('✅ products.js INICIO')
 
 const URL = '../products.json'
 const productos = []
 let container = null
 
-console.log('📌 Variables inicializadas')
-
 // Obtener la categoría del título de la página
 const obtenerCategoriaActual = () => {
     const h1 = document.querySelector('h1')
-    console.log('🔍 H1 element:', h1)
-    console.log('🔍 H1 textContent:', h1?.textContent)
-    console.log('🔍 H1 innerHTML:', h1?.innerHTML)
-    
     if(h1 && h1.textContent.trim()) {
-        const text = h1.textContent.trim()
-        console.log('✅ Usando H1:', text)
+        const text = h1.textContent.trim()        
         return text
     }
-    const titulo = document.title.trim()
-    console.log('✅ Usando title:', titulo)
+    const titulo = document.title.trim()    
     return titulo
 }
 
@@ -56,8 +46,7 @@ const retornarCardHtml = (producto) => {
 
 // Filtrar productos por categoría
 const filtrarProductosPorCategoria = (todosLosProductos) => {
-    const categoriaActual = obtenerCategoriaActual()
-    console.log('📂 Categoría actual:', categoriaActual)
+    const categoriaActual = obtenerCategoriaActual()    
     return todosLosProductos.filter(producto => producto.category === categoriaActual)
 }
 
@@ -127,13 +116,10 @@ const scrollAlProducto = () => {
 }
 
 // Cargar datos
-const inicializarApp = () => {
-    console.log('🔵 Iniciando app...')
-    
+const inicializarApp = () => {       
     fetch(URL)
     .then(response => response.json())
-    .then(data => {
-        console.log('📦 Productos cargados:', data.length)
+    .then(data => {       
         productos.push(...data)
         
         const productosFiltrados = filtrarProductosPorCategoria(productos)
@@ -143,18 +129,12 @@ const inicializarApp = () => {
         scrollAlProducto()
         
         // Esperar a que el navBar cargue
-        setTimeout(() => {
-            console.log('⏳ Inicializando búsqueda...')
+        setTimeout(() => {            
             inicializarBusqueda()
         }, 1000)
     })
     .catch(error => console.error('❌ Error:', error))
 }
-
-console.log('📌 Estado del documento:', document.readyState)
-
-// Ejecutar cuando el documento esté listo
-console.log('📌 Estado del documento:', document.readyState)
 
 // Solo ejecutar en páginas de productos
 if(esPagenaProductos()) {
