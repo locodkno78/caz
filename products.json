@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "image":"../IMG/herramientas-industriales.jpg",
+        "name": "PRODUCTO",
+        "description": "Descripción del producto",
+        "category": "Alambres",
+        "stock": 150
+    },
+    {
+        "id": 2,
+        "image":"../IMG/herramientas-industriales.jpg",
+        "name": "PRODUCTO",
+        "description": "Descripción del producto",
+        "category": "Electrodos",
+        "stock": 85
+    },
+    {
+        "id": 3,
+        "image":"../IMG/herramientas-industriales.jpg",
+        "name": "PRODUCTO",
+        "description": "Descripción del producto",
+        "category": "Herramientas",
+        "stock": 40
+    },
+    {
+        "id": 4,
+        "image":"../IMG/herramientas-industriales.jpg",
+        "name": "PRODUCTO",
+        "description": "Descripción del producto",
+        "category": "Soldadoras",
+        "stock": 200
+    },
+    {
+        "id": 5,
+        "image":"../IMG/herramientas-industriales.jpg",
+        "name": "PRODUCTO",
+        "description": "Descripción del producto",
+        "category": "Sopleteria",
+        "stock": 120
+    }
+]
