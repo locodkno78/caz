@@ -1,3 +1,86 @@
+console.log('✅ index.js cargado')
+
+// Cargar products.js dinámicamente
+const scriptProducts = document.createElement('script')
+scriptProducts.src = '../JS/products.js'
+document.head.appendChild(scriptProducts)
+
+// Cargar productos para la búsqueda global
+let productosGlobales = []
+
+fetch('../products.json')
+.then(response => response.json())
+.then(data => {
+    productosGlobales = data
+    console.log('📦 Productos cargados para búsqueda:', productosGlobales.length)
+})
+.catch(error => console.error('Error cargando productos:', error))
+
+// Mapeo de categorías
+const mapaCategorias = {
+    'Alambres': '../PRODUCTS/alambres.html',
+    'Electrodos': '../PRODUCTS/electrodos.html',
+    'Herramientas': '../PRODUCTS/herramientas.html',
+    'Soldadoras': '../PRODUCTS/soldadoras.html',
+    'Sopleteria': '../PRODUCTS/sopleteria.html',
+    'Torchas': '../PRODUCTS/torchas.html'
+}
+
+const obtenerUrlCategoria = (categoria) => {
+    return mapaCategorias[categoria] || '../index.html'
+}
+
+// Buscar productos
+const buscarProductos = (termino) => {
+    const terminoLower = termino.toLowerCase()
+    return productosGlobales.filter(producto => 
+        producto.name.toLowerCase().includes(terminoLower) ||
+        producto.category.toLowerCase().includes(terminoLower)
+    )
+}
+
+// Inicializar búsqueda
+const inicializarBusquedaGlobal = () => {
+    const searchForm = document.getElementById('searchForm')
+    const searchInput = document.getElementById('searchInput')
+    
+    if(!searchForm || !searchInput) {
+        return
+    }
+    
+    searchForm.addEventListener('submit', (e) => {
+        e.preventDefault()
+        const termino = searchInput.value.trim()
+        
+        if(termino !== '') {
+            const resultados = buscarProductos(termino)
+            
+            if(resultados.length > 0) {
+                const productoEncontrado = resultados[0]
+                const categoria = productoEncontrado.category
+                const productoId = productoEncontrado.id
+                const url = obtenerUrlCategoria(categoria)
+                
+                // Guardar el ID del producto a encontrar
+                localStorage.setItem('buscarProductoId', productoId)
+                
+                // Navegar a la URL
+                window.location.href = url
+            } else {
+                alert('No se encontraron productos')
+            }
+        }
+    })
+}
+
+// Esperar a que el navBar cargue
+setTimeout(() => {
+    const searchForm = document.getElementById('searchForm')
+    if(searchForm) {
+        inicializarBusquedaGlobal()
+    }
+}, 1500)
+
 fetch('../navBar.html')
 .then(response => response.text())
 .then(data => {
@@ -20,17 +103,20 @@ fetch('../footer.html')
 .catch(error => console.error('Error cargando el footer:', error));
 
 
+    // Solo ejecutar el efecto de escritura si el h1 contiene "CAZ" (página principal)
     let title = document.querySelector('.h1');
-    let text = 'CAZ Insumos Industriales';
-    let letterStart = 0;
-    let letterEnd = 1;
-    let write = setInterval(() => {
-      if (title) {
-        title.innerHTML = text.slice(letterStart, letterEnd);
-        letterEnd++;
-        if (letterEnd > text.length) {
-          letterEnd = 1;
-        }
-      }
-    }, 200);
+    if(title && !title.textContent.includes('Alambres') && !title.textContent.includes('Electrodos') && !title.textContent.includes('Herramientas') && !title.textContent.includes('Soldadoras') && !title.textContent.includes('Sopleteria') && !title.textContent.includes('Torchas')) {
+        let text = 'CAZ Insumos Industriales';
+        let letterStart = 0;
+        let letterEnd = 1;
+        let write = setInterval(() => {
+          if (title) {
+            title.innerHTML = text.slice(letterStart, letterEnd);
+            letterEnd++;
+            if (letterEnd > text.length) {
+              letterEnd = 1;
+            }
+          }
+        }, 200);
+    }
   

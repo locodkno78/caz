@@ -2,7 +2,7 @@
     {
         "id": 1,
         "image":"../IMG/herramientas-industriales.jpg",
-        "name": "PRODUCTO",
+        "name": "Alambre 25kg",
         "description": "Descripción del producto",
         "category": "Alambres",
         "stock": 150
@@ -10,7 +10,7 @@
     {
         "id": 2,
         "image":"../IMG/herramientas-industriales.jpg",
-        "name": "PRODUCTO",
+        "name": "Electrodos 3M",
         "description": "Descripción del producto",
         "category": "Electrodos",
         "stock": 85
@@ -18,15 +18,15 @@
     {
         "id": 3,
         "image":"../IMG/herramientas-industriales.jpg",
-        "name": "PRODUCTO",
+        "name": "Pinza de Mano",
         "description": "Descripción del producto",
-        "category": "Herramientas",
+        "category": "Herramientas de Mano",
         "stock": 40
     },
     {
         "id": 4,
         "image":"../IMG/herramientas-industriales.jpg",
-        "name": "PRODUCTO",
+        "name": "M-150",
         "description": "Descripción del producto",
         "category": "Soldadoras",
         "stock": 200
@@ -34,9 +34,65 @@
     {
         "id": 5,
         "image":"../IMG/herramientas-industriales.jpg",
-        "name": "PRODUCTO",
+        "name": "S-90",
         "description": "Descripción del producto",
-        "category": "Sopleteria",
+        "category": "Sopleteria & Reguladores",
+        "stock": 120
+    },
+    {
+        "id": 6,
+        "image":"../IMG/herramientas-industriales.jpg",
+        "name": "Palanca TX",
+        "description": "Descripción del producto",
+        "category": "Torchas & Respuestos",
+        "stock": 120
+    },
+    {
+        "id": 7,
+        "image":"../IMG/logo.jpeg",
+        "name": "Alambre 355kg",
+        "description": "Descripción del producto",
+        "category": "Alambres",
+        "stock": 150
+    },
+    {
+        "id": 8,
+        "image":"../IMG/logo.jpeg",
+        "name": "Electrodos Gambling",
+        "description": "Descripción del producto",
+        "category": "Electrodos",
+        "stock": 85
+    },
+    {
+        "id": 9,
+        "image":"../IMG/logo.jpeg",
+        "name": "Llave Inglesa",
+        "description": "Descripción del producto",
+        "category": "Herramientas de Mano",
+        "stock": 40
+    },
+    {
+        "id": 10,
+        "image":"../IMG/logo.jpeg",
+        "name": "M-390",
+        "description": "Descripción del producto",
+        "category": "Soldadoras",
+        "stock": 200
+    },
+    {
+        "id": 11,
+        "image":"../IMG/logo.jpeg",
+        "name": "S-9025",
+        "description": "Descripción del producto",
+        "category": "Sopleteria & Reguladores",
+        "stock": 120
+    },
+    {
+        "id": 12,
+        "image":"../IMG/logo.jpeg",
+        "name": "Polea liviana",
+        "description": "Descripción del producto",
+        "category": "Torchas & Respuestos",
         "stock": 120
     }
 ]
