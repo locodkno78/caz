@@ -88,6 +88,7 @@ setTimeout(() => {
   }
 }, 1500);
 
+// Cargar componentes comunes
 fetch("../navBar.html")
   .then((response) => response.text())
   .then((data) => {
@@ -108,6 +109,13 @@ fetch("../footer.html")
     document.getElementById("footer").innerHTML = data;
   })
   .catch((error) => console.error("Error cargando el footer:", error));
+
+  fetch("../cards.html")
+  .then((response) => response.text())
+  .then((data) => {
+    document.getElementById("cards").innerHTML = data;
+  })
+  .catch((error) => console.error("Error cargando las tarjetas:", error));
 
 // Solo ejecutar el efecto de escritura si el h1 contiene "CAZ" (página principal)
 let title = document.querySelector(".h1");
