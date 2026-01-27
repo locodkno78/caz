@@ -1,158 +1,208 @@
-.title{
-    text-align: center;
-    margin-top: 2%;    
+.title {
+  text-align: center;
+  margin-top: 2%;
 }
 
 .h1title {
-    text-align: center;
-    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: larger;
-    margin-top: 1%;
-    color: black;
+  text-align: center;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  font-size: larger;
+  margin-top: 1%;
+  color: black;
 }
 /* WhatsApp Button */
 .whatsapp-button {
-    position: fixed;
-    bottom: 30px;
-    right: 35px;
-    background-color: #25D366;
-    color: white;
-    border: none;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
+  position: fixed;
+  bottom: 30px;
+  right: 35px;
+  background-color: #25d366;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
 }
 
 .whatsapp-button:hover {
-    background-color: #1e9e52;
+  background-color: #1e9e52;
 }
 
 .whatsapp-button i {
-    font-size: 35px;
-}/* WhatsApp floating button */
-.whatsapp-button{
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    background-color: #25D366;
-    color: #fff;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    text-decoration: none;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    z-index: 9999;
+  font-size: 35px;
+} /* WhatsApp floating button */
+.whatsapp-button {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background-color: #25d366;
+  color: #fff;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
 }
 
-.whatsapp-button:hover{
-    transform: translateY(-2px);
+.whatsapp-button:hover {
+  transform: translateY(-2px);
 }
 
 .form {
-    flex: 1; /* Hace que el contenedor ocupe el espacio restante */
-    margin-top: 5% !important; /* Ajusta el margen superior y usa !important para asegurar la aplicación */
-    margin-bottom: 5% !important;    
-    text-align: center;
-    color: white;
-    background-color: rgba(8, 8, 8, 0.9); /* Fondo semitransparente para el formulario */
-    padding: 15px; /* Reduce el espaciado interno del formulario */
-    border-radius: 8px; /* Bordes redondeados */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para efecto de elevación */
-    width: 80% !important; /* Reduce el ancho del contenedor al 80% del disponible */
-    max-width: 500px !important; /* Ajusta el ancho máximo del formulario */
-    margin-left: auto; /* Centra horizontalmente el contenedor */
-    margin-right: auto; /* Centra horizontalmente el contenedor */
+  flex: 1; /* Hace que el contenedor ocupe el espacio restante */
+  margin-top: 5% !important; /* Ajusta el margen superior y usa !important para asegurar la aplicación */
+  margin-bottom: 5% !important;
+  text-align: center;
+  color: white;
+  background-color: rgba(
+    8,
+    8,
+    8,
+    0.9
+  ); /* Fondo semitransparente para el formulario */
+  padding: 15px; /* Reduce el espaciado interno del formulario */
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra para efecto de elevación */
+  width: 80% !important; /* Reduce el ancho del contenedor al 80% del disponible */
+  max-width: 500px !important; /* Ajusta el ancho máximo del formulario */
+  margin-left: auto; /* Centra horizontalmente el contenedor */
+  margin-right: auto; /* Centra horizontalmente el contenedor */
 }
 
-.contact{
-    background-image: url(../IMG/logo.jpeg);
-    background-size: cover;
-    background-position: center;
+.contact {
+  background-image: url(../IMG/logo.jpeg);
+  background-size: cover;
+  background-position: center;
 }
 
 /* Contenedor para las cards */
 .container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 /* Estilo de las cards */
 .card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    /* Ancho relativo al contenedor */
-    height: 450px;
-    /* Altura fija para todas las tarjetas */
-    overflow: hidden;
-    /* Evita desbordamientos */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* Sombra para darle un efecto visual */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  /* Ancho relativo al contenedor */
+  height: 450px;
+  /* Altura fija para todas las tarjetas */
+  overflow: hidden;
+  /* Evita desbordamientos */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  /* Sombra para darle un efecto visual */
 }
 
-
 .card-body {
-    text-align: center;
+  text-align: center;
 }
 
 .card img {
-    width: 100%;
-    height: 350px;
-    object-fit: cover;
-}
-
-.card .card-image img {
-    width: 100%;
-    /* Ajusta la imagen al ancho de la tarjeta */
-    height: 200px;
-    /* Mantén la proporción de la imagen */
-    object-fit: cover;
-    /* Recorta la imagen si es necesario */
+  width: 100%;
+  aspect-ratio: 1 / 1; /* 🔥 cuadrada */
+  object-fit: contain; /* ver imagen completa */
+  border-radius: 6px;
 }
 
 .carousel-item img {
-    width: 100%;
-    /* Ajusta la imagen al ancho de la tarjeta */
-    height: 200px;
-    /* Altura fija para las imágenes */
-    object-fit: cover;
-    /* Recorta la imagen si es más grande, manteniendo el tamaño */
+  width: 100%;
+  /* Ajusta la imagen al ancho de la tarjeta */
+  height: 200px;
+  /* Altura fija para las imágenes */
+  object-fit: cover;
+  /* Recorta la imagen si es más grande, manteniendo el tamaño */
 }
 
-
 .card .card-name {
-    font-size: 24px;
-    text-align: center;
-    font-weight: bold;
-    margin-top: 10px;
+  font-size: 24px;
+  text-align: center;
+  font-weight: bold;
+  margin-top: 10px;
 }
 
 .card .card-stock {
-    text-align: center;
-    font-size: 15px;       
+  text-align: center;
+  font-size: 15px;
 }
 
 .card .card-button {
-    text-align: center;
-    display: block;
-    margin-top: auto;
-    text-align: center;
-    padding: 10px;
-    width: 100%;
-    cursor: pointer;
+  text-align: center;
+  display: block;
+  margin-top: auto;
+  text-align: center;
+  padding: 10px;
+  width: 100%;
+  cursor: pointer;
+}
+
+.card-description {
+  font-size: 14px;
+  color: #ccc;
+  text-align: center;
+
+  overflow: hidden;
+  display: -webkit-box;
+
+  -webkit-box-orient: vertical;
+}
+
+/* Modal personalizado */
+.modal-producto {
+  max-width: 520px; /* angosto */
+  height: 95vh; /* casi toda la pantalla */
+  margin: auto;
+}
+
+/* Estructura vertical */
+.modal-producto .modal-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========================= */
+/* IMAGEN PROTAGONISTA */
+/* ========================= */
+
+.modal-producto .carousel {
+  flex: 0 0 60%; /* ⬅️ ocupa el 60% del alto del modal */
+}
+
+.modal-producto .carousel-inner,
+.modal-producto .carousel-item {
+  height: 100%;
+}
+
+.modal-producto .carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* sin recortar */
+  background-color: #000;
+  aspect-ratio: 1 / 1; /* cuadrada */
+}
+
+/* ========================= */
+/* CONTENIDO */
+/* ========================= */
+
+.modal-producto .modal-body {
+  flex: 1;
+  padding: 15px;
 }
