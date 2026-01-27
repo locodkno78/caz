@@ -46,11 +46,57 @@ const retornarCardHtml = (producto) => {
       <div class="card-description">${producto.characteristics}</div>
       <div class="card-category">Categoría: ${producto.category}</div>
       <div class="card-button">
-        <button class="btn btn-danger">VER</button>
+        <button 
+          class="btn btn-danger btn-ver-producto"
+          data-id='${producto.id}'
+          data-name='${producto.name}'
+          data-img='${producto.img}'
+          data-img2='${producto.img2}'
+          data-category='${producto.category}'
+          data-description='${producto.characteristics}'
+          data-stock='${producto.quantity}'
+          data-bs-toggle="modal"
+          data-bs-target="#productModal"
+        >
+          VER
+        </button>
       </div>
     </div>
-  `
-}
+  `;
+};
+const modalExiste = () => {
+  return (
+    document.getElementById("productModal") &&
+    document.getElementById("modalTitle") &&
+    document.getElementById("carouselInner")
+  );
+};
+
+document.addEventListener("click", (e) => {
+  if (!modalExiste()) return;
+
+  const btn = e.target.closest(".btn-ver-producto");
+  if (!btn) return;
+
+  document.getElementById("modalTitle").textContent = btn.dataset.name;
+  document.getElementById("modalDescription").textContent = btn.dataset.description;
+  document.getElementById("modalCategory").textContent = btn.dataset.category;
+  document.getElementById("modalStock").textContent = btn.dataset.stock;
+
+  const carouselInner = document.getElementById("carouselInner");
+  carouselInner.innerHTML = "";
+
+  [btn.dataset.img, btn.dataset.img2]
+    .filter(Boolean)
+    .forEach((img, index) => {
+      carouselInner.innerHTML += `
+        <div class="carousel-item ${index === 0 ? "active" : ""}">
+          <img src="${img}" class="d-block w-100">
+        </div>
+      `;
+    });
+});
+
 
 
 // Filtrar productos por categoría
@@ -60,10 +106,6 @@ const filtrarProductosPorCategoria = (todosLosProductos) => {
     (producto) => producto.category === categoriaActual,
   );
 };
-
-// Nota: buscarProductos está definida en index.js para evitar duplicados
-
-// Nota: mapaCategorias está definida en index.js para evitar duplicados
 
 // Cargar productos en el DOM
 const cargarProductos = (array) => {
