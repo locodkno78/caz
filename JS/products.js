@@ -107,32 +107,32 @@ const filtrarProductosPorCategoria = (todosLosProductos) => {
   );
 };
 
-// Cargar productos en el DOM
 const cargarProductos = (array) => {
-  let container = document.getElementById("product-container");
+  if (!Array.isArray(array)) return;
+
+  const container = document.getElementById("product-container");
 
   if (!container) {
-    container = document.querySelector("div.container");
-  }
-
-  if (!container) {
-    console.log("❌ No se encontró el container");
+    console.warn("⏭ No hay contenedor de productos en esta página");
     return;
   }
 
   container.innerHTML = "";
 
-  if (array.length > 0) {
-    array.forEach((producto) => {
-      container.innerHTML += retornarCardHtml(producto);
-    });
-    console.log("✅ Se cargaron", array.length, "productos");
-  } else {
-    container.innerHTML =
-      '<p style="grid-column: 1 / -1; text-align: center; color: #999;">No se encontraron productos</p>';
+  if (array.length === 0) {
+    container.innerHTML = `
+      <p style="grid-column: 1 / -1; text-align: center; color: #999;">
+        No se encontraron productos
+      </p>
+    `;
+    return;
   }
-};
 
+  array.forEach(producto => {
+    const html = retornarCardHtml(producto);
+    if (html) container.insertAdjacentHTML("beforeend", html);
+  }); 
+};
 
 // Inicializar búsqueda - AQUÍ SOLO RECARGAMOS LA VISTA ACTUAL
 const inicializarBusqueda = () => {
@@ -188,9 +188,7 @@ const inicializarApp = async () => {
         id: doc.id,
         ...doc.data()
       })
-    })
-
-    console.log('🔥 Productos cargados desde Firestore:', productos.length)
+    })    
 
     const productosFiltrados = filtrarProductosPorCategoria(productos)
     cargarProductos(productosFiltrados)
