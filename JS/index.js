@@ -12,12 +12,7 @@ const cargarProductosDesdeFirestore = async () => {
       id: doc.id,
       ...doc.data(),
     });
-  });
-
-  console.log(
-    "🔥 Productos cargados desde Firestore:",
-    productosGlobales.length,
-  );
+  }); 
 };
 
 cargarProductosDesdeFirestore();
@@ -110,12 +105,19 @@ fetch("../footer.html")
   })
   .catch((error) => console.error("Error cargando el footer:", error));
 
-  fetch("../cards.html")
+ fetch("../cards.html")
   .then((response) => response.text())
   .then((data) => {
-    document.getElementById("cards").innerHTML = data;
+    const cardsContainer = document.getElementById("cards");
+
+    if (!cardsContainer) {      
+      return;
+    }
+
+    cardsContainer.innerHTML = data;
   })
   .catch((error) => console.error("Error cargando las tarjetas:", error));
+
 
 // Solo ejecutar el efecto de escritura si el h1 contiene "CAZ" (página principal)
 let title = document.querySelector(".h1");
