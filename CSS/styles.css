@@ -220,6 +220,10 @@ h1 {
   height: 450px;
   overflow: hidden;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.28s cubic-bezier(.22,.9,.37,1), box-shadow 0.28s ease;
+  transform: translateY(0);
+  will-change: transform, box-shadow;
+  border-radius: 8px;
 }
 
 .card-body {
@@ -232,6 +236,50 @@ h1 {
   object-fit: contain;
   border-radius: 6px;
   border-color: transparent;
+}
+
+/* Íconos dentro de las cards */
+.card .icon {
+  font-size: 48px;
+  color: #ffffff;
+  margin-bottom: 12px;
+  display: inline-block;
+}
+
+@media (max-width: 768px) {
+  .card .icon {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+  .card .icon {
+    font-size: 32px;
+  }
+}
+
+/* Cambiar color del icono y textos a rojo al pasar el mouse */
+.card .card-title,
+.card .card-text {
+  transition: color 0.18s ease;
+}
+
+.card:hover .icon,
+.card:focus-within .icon {
+  color: red;
+}
+
+.card:hover .card-title,
+.card:focus-within .card-title,
+.card:hover .card-text,
+.card:focus-within .card-text {
+  color: red;
+}
+
+/* Efecto al pasar el mouse: levanta la card */
+.card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.18);
 }
 
 .card-title {
@@ -420,6 +468,7 @@ h1 {
   justify-content: center;
   align-items: center;
   padding: 20px;
+  margin-top: 5%;
 }
 .clientes h1 {
   width: 100%;
