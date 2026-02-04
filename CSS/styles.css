@@ -412,3 +412,35 @@ h1 {
     font-size: 0.9rem;
   }
 }
+
+/* Nuestros Clientes - logos uniformes */
+.clientes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+.clientes h1 {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.clientes img {
+  width: 160px;
+  height: 100px;
+  object-fit: contain;
+  background: #ffffff;
+  padding: 8px;
+  border-radius: 6px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+}
+
+@media (max-width: 480px) {
+  .clientes img {
+    width: 120px;
+    height: 80px;
+  }
+}
+
