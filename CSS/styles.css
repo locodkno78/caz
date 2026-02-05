@@ -288,6 +288,7 @@ h1 {
   margin-top: 3%;
   text-align: center;
   color: #222;
+  font-family: 'Cinzel', 'Playfair Display', serif;
 }
 
 .card-text {
@@ -490,4 +491,56 @@ h1 {
     width: 120px;
     height: 80px;
   }
+}
+
+.services-section {
+  max-width: 1100px;
+  margin: 60px auto;
+  padding: 0 20px;
+}
+
+.services-section h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: 'Cinzel', 'Playfair Display', serif;
+  letter-spacing: 1px;
+  font-size: 2.5rem;
+}
+
+.services-intro {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #555;
+  font-family: 'Cinzel', 'Playfair Display', serif;
+}
+
+.services-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.service-card {  
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(11, 11, 11, 0.9)!important;
+  text-align: center;
+}
+
+.service-icon {
+  font-size: 40px;
+  color: #f44e07; /* color corporativo editable */
+  margin-bottom: 15px;
+}
+
+.service-card h3 {
+  margin-bottom: 15px;
+  font-size: 18px;
+  color: black;
+}
+
+.service-card p {
+  color: black;
+  font-size: 15px;
+  line-height: 1.6;
 }
