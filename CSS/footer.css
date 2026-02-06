@@ -1,0 +1,40 @@
+/* Iconos de redes sociales */
+
+.instagram-icon {
+  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-decoration: none;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  display: inline-block;
+}
+
+.instagram-icon:hover {
+  transform: scale(1.15);
+  filter: brightness(1.2);
+}
+
+.facebook-icon {
+  color: #1877f2;
+  text-decoration: none;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  display: inline-block;
+}
+
+.facebook-icon:hover {
+  transform: scale(1.15);
+  filter: brightness(1.2);
+}
+
+.email-icon {
+  color: #EA4335;
+  text-decoration: none;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  display: inline-block;
+}
+
+.email-icon:hover {
+  transform: scale(1.15);
+  filter: brightness(1.2);
+}

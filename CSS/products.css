@@ -1,0 +1,118 @@
+/* Sección de Productos */
+
+.products-section {
+  max-width: 1200px;
+  margin: 80px auto;
+  padding: 0 20px;
+}
+
+.products-section h2 {
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: 'Cinzel', 'Playfair Display', serif;
+  letter-spacing: 1px;
+  font-size: 2.5rem;
+}
+
+.products-intro {
+  text-align: center;
+  margin-bottom: 40px;
+  color: #555;
+  font-family: 'Cinzel', 'Playfair Display', serif;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+}
+
+.product-card {
+  background: linear-gradient(to bottom,
+    #0d0d0d 0%,
+    #1f1f1f 25%,
+    #2a2a2a 50%,
+    #1f1f1f 75%,
+    #0d0d0d 100%);
+  border-radius: 10px;
+  padding: 30px 20px;
+  text-align: center;
+  text-decoration: none;
+  color: white;
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.8);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.product-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  background: linear-gradient(to bottom,
+    #1a1a1a 0%,
+    #2d2d2d 25%,
+    #3a3a3a 50%,
+    #2d2d2d 75%,
+    #1a1a1a 100%);
+  box-shadow: 
+    0 12px 28px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -2px 8px rgba(0, 0, 0, 0.9);
+}
+
+.product-card:hover h3 {
+  color: red;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .products-section {
+    margin: 60px auto;
+  }
+  .products-section h2 {
+    font-size: 2rem;
+  }
+  .products-intro {
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+  }
+  .products-grid {
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+  }
+  .product-card {
+    padding: 20px 15px;
+  }
+  .product-card h3 {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .products-section {
+    margin: 40px auto;
+    padding: 0 10px;
+  }
+  .products-section h2 {
+    font-size: 1.5rem;
+  }
+  .products-intro {
+    margin-bottom: 20px;
+    font-size: 0.9rem;
+  }
+  .products-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+  }
+  .product-card {
+    padding: 15px 10px;
+  }
+  .product-card h3 {
+    font-size: 12px;
+  }
+}
