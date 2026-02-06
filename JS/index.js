@@ -17,20 +17,6 @@ const cargarProductosDesdeFirestore = async () => {
 
 cargarProductosDesdeFirestore();
 
-// Mapeo de categorías
-const mapaCategorias = {
-  Alambres: "../PRODUCTS/alambres.html",
-  Electrodos: "../PRODUCTS/electrodos.html",
-  "Herramientas de Mano": "../PRODUCTS/herramientas.html",
-  Soldadoras: "../PRODUCTS/soldadoras.html",
-  "Sopleteria & Reguladores": "../PRODUCTS/sopleteria.html",
-  "Torchas & Respuestos": "../PRODUCTS/torchas.html",
-};
-
-const obtenerUrlCategoria = (categoria) => {
-  return mapaCategorias[categoria] || "../index.html";
-};
-
 // Buscar productos
 const buscarProductos = (termino) => {
   const terminoLower = termino.toLowerCase();
@@ -58,16 +44,7 @@ const inicializarBusquedaGlobal = () => {
       const resultados = buscarProductos(termino);
 
       if (resultados.length > 0) {
-        const productoEncontrado = resultados[0];
-        const categoria = productoEncontrado.category;
-        const productoId = productoEncontrado.id;
-        const url = obtenerUrlCategoria(categoria);
-
-        // Guardar el ID del producto a encontrar
-        localStorage.setItem("buscarProductoId", productoId);
-
-        // Navegar a la URL
-        window.location.href = url;
+        alert("Producto encontrado: " + resultados[0].name);
       } else {
         alert("No se encontraron productos");
       }
@@ -143,3 +120,4 @@ if (
     }
   }, 200);
 }
+

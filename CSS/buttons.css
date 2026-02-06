@@ -18,7 +18,9 @@
   z-index: 9999;
   border: none;
   cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    background-color 0.3s ease;
 }
 
 .whatsapp-button:hover {
@@ -41,4 +43,40 @@
   .whatsapp-button i {
     font-size: 24px;
   }
+}
+
+.btn {  
+  display: block;
+  margin-left: 0.5%;
+  margin-right: auto;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  width: fit-content;
+  transition: all 0.3s ease;
+  background: linear-gradient(to bottom,
+    #1a1a1a 0%,
+    #2d2d2d 25%,
+    #3a3a3a 50%,
+    #2d2d2d 75%,
+    #1a1a1a 100%) !important;
+  color: white !important;
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.8);
+}
+
+.btn:hover,
+.btn.btn-dark:hover {
+  background: linear-gradient(to bottom, 
+    #e74c3c 0%, 
+    #c0392b 25%, 
+    #a93226 50%, 
+    #c0392b 75%, 
+    #e74c3c 100%) !important;
+  color: white !important;
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.8);
 }

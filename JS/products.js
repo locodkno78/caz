@@ -1,30 +1,24 @@
 import { getProduct } from "./firebase.js";
-// Verificar si estamos en una página de productos (no es index)
-const esPagenaProductos = () => {
-  return (
-    !document.title.includes("Home") &&
-    document.querySelector("h1") &&
-    (document.title.includes("Alambres") ||
-      document.title.includes("Electrodos") ||
-      document.title.includes("Herramientas de Mano") ||
-      document.title.includes("Soldadoras") ||
-      document.title.includes("Sopleteria & Reguladores") ||
-      document.title.includes("Torchas & Respuestos") ||
-      document.querySelector("h1").textContent.includes("Alambres") ||
-      document.querySelector("h1").textContent.includes("Electrodos") ||
-      document
-        .querySelector("h1")
-        .textContent.includes("Herramientas de Mano") ||
-      document.querySelector("h1").textContent.includes("Soldadoras") ||
-      document
-        .querySelector("h1")
-        .textContent.includes("Sopleteria & Reguladores") ||
-      document.querySelector("h1").textContent.includes("Torchas & Respuestos"))
-  );
-};
 
-//const URL = '../products.json'
+// Productos en memoria
 const productos = [];
+
+// Normalizar texto para comparar categorías (quita tildes, minusculas y espacios extras)
+const normalize = (str = "") =>
+  str
+    .toString()
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .replace(/[^\w\s&-]/g, "")
+    .trim()
+    .toLowerCase();
+
+// Detectar si la página es de productos: SOLO si está en la carpeta /products/
+const esPaginaProductos = () => {
+  const path = window.location.pathname || "";
+  // Solo ejecutar si la ruta incluye /products/ (excluye index, productos.html, etc)
+  return path.toLowerCase().includes("/products/");
+};
 
 // Obtener la categoría del título de la página
 const obtenerCategoriaActual = () => {
@@ -102,9 +96,65 @@ document.addEventListener("click", (e) => {
 // Filtrar productos por categoría
 const filtrarProductosPorCategoria = (todosLosProductos) => {
   const categoriaActual = obtenerCategoriaActual();
-  return todosLosProductos.filter(
-    (producto) => producto.category === categoriaActual,
-  );
+  const normCategoriaPagina = normalize(categoriaActual);
+
+  return todosLosProductos.filter((producto) => {
+    const catProducto = producto.category || producto.categoryName || "";
+    const normCatProducto = normalize(catProducto);
+    // Coincidencia si una incluye a la otra (maneja abreviaturas y pequeñas diferencias)
+    return (
+      normCatProducto.includes(normCategoriaPagina) ||
+      normCategoriaPagina.includes(normCatProducto)
+    );
+  });
+};
+
+// Si falta el contenedor o el modal en el HTML, crearlos dinámicamente
+const asegurarContenedorYModal = () => {
+  let container = document.getElementById("product-container");
+  if (!container) {
+    const h1 = document.querySelector("h1");
+    container = document.createElement("div");
+    container.id = "product-container";
+    container.className = "container products-container";
+    if (h1 && h1.parentNode) {
+      h1.insertAdjacentElement("afterend", container);
+    } else {
+      document.body.insertBefore(container, document.body.firstChild);
+    }
+  }
+
+  if (!document.getElementById("productModal")) {
+    const modalHtml = `
+      <div class="modal fade" id="productModal" tabindex="-1">
+        <div class="modal-dialog modal-producto">
+          <div class="modal-content bg-dark text-white">
+            <div class="modal-header">
+              <h5 class="modal-title" id="modalTitle"></h5>
+              <button class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+              <div id="productCarousel" class="carousel slide">
+                <div class="carousel-inner" id="carouselInner"></div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                  <span class="carousel-control-next-icon"></span>
+                </button>
+              </div>
+              <p class="mt-3" id="modalDescription"></p>
+              <p><strong>Categoría:</strong> <span id="modalCategory"></span></p>
+              <p><strong>Stock:</strong> <span id="modalStock"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+    const wrapper = document.createElement("div");
+    wrapper.innerHTML = modalHtml;
+    document.body.appendChild(wrapper.firstElementChild);
+  }
 };
 
 const cargarProductos = (array) => {
@@ -190,6 +240,9 @@ const inicializarApp = async () => {
       })
     })    
 
+    // Asegurar que el contenedor/modal existan en la página
+    asegurarContenedorYModal();
+
     const productosFiltrados = filtrarProductosPorCategoria(productos)
     cargarProductos(productosFiltrados)
 
@@ -205,7 +258,7 @@ const inicializarApp = async () => {
 }
 
 // Solo ejecutar en páginas de productos
-if (esPagenaProductos()) {
+if (esPaginaProductos()) {
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", inicializarApp);
   } else {
