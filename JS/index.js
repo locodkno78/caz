@@ -1,6 +1,9 @@
 import "./products.js";
 import { getProduct } from "../JS/firebase.js";
-// Cargar productos para la búsqueda global
+
+// ===============================
+// PRODUCTOS PARA BÚSQUEDA GLOBAL
+// ===============================
 let productosGlobales = [];
 
 const cargarProductosDesdeFirestore = async () => {
@@ -12,112 +15,162 @@ const cargarProductosDesdeFirestore = async () => {
       id: doc.id,
       ...doc.data(),
     });
-  }); 
+  });
 };
 
 cargarProductosDesdeFirestore();
 
-// Buscar productos
+// ===============================
+// BUSCAR PRODUCTOS
+// ===============================
 const buscarProductos = (termino) => {
   const terminoLower = termino.toLowerCase();
+
   return productosGlobales.filter(
     (producto) =>
-      producto.name.toLowerCase().includes(terminoLower) ||
-      producto.category.toLowerCase().includes(terminoLower),
+      producto.name?.toLowerCase().includes(terminoLower) ||
+      producto.category?.toLowerCase().includes(terminoLower),
   );
 };
 
-// Inicializar búsqueda
+// ===============================
+// MAPEO CATEGORÍA → PÁGINA
+// 🔴 AGREGÁ MÁS CATEGORÍAS ACÁ
+// ===============================
+const mapearCategoriaAPagina = (categoria = "") => {
+  const map = {
+    accesorios: "accesorios.html",
+    alambres: "alambres.html",
+    auxiliares: "auxiliares.html",
+    calefactores: "calefactores.html",
+    cintas: "cintas.html",
+    compresores: "compresores.html",
+    consumibles: "consumibles.html",
+    discos: "discos.html",
+    electrodos: "electrodos.html",
+    embalajes: "embalajes.html",
+    equipos: "equipos.html",
+    ferreteria: "ferreteria.html",
+    filtros: "filtros.html",
+    gases: "gases.html",
+    gomeria: "gomeria.html",
+    herramientas: "herramientas.html",
+    hornos: "hornos.html",
+    izajes: "izajes.html",
+    paneles: "paneles.html",
+    proteccion: "proteccion.html",
+    reguladores: "reguladores.html",
+    resortes: "resortes.html",
+    soldadoras: "soldadoras.html",
+    sopleteriaYReguladores: "sopleteria.html",
+    torchasYRespuestos: "torchas.html",
+    varillas: "varillas.html",
+    viales: "viales.html",
+  };
+
+  return map[categoria.toLowerCase()] || "index.html";
+};
+
+// ===============================
+// DETECTAR CATEGORÍA DESDE TEXTO
+// ===============================
+const detectarCategoriaDesdeTexto = (texto = "") => {
+  const t = texto.toLowerCase();
+
+  if (t.includes("accesorio")) return "accesorios";
+  if (t.includes("alambre")) return "alambres";
+  if (t.includes("auxiliar")) return "auxiliares";
+  if (t.includes("calefactor")) return "calefactores";
+  if (t.includes("cinta")) return "cintas";
+  if (t.includes("compresor")) return "compresores";
+  if (t.includes("consumible")) return "consumibles";
+  if (t.includes("disco")) return "discos";
+  if (t.includes("electro")) return "electrodos";
+  if (t.includes("embalaje")) return "embalajes";
+  if (t.includes("equipo")) return "equipos";
+  if (t.includes("ferreteria") || t.includes("ferretero")) return "ferreteria";
+  if (t.includes("filtro")) return "filtros";
+  if (t.includes("gas")) return "gases";
+  if (t.includes("gomeri")) return "gomeria";
+  if (t.includes("herramienta") || t.includes("herramientas"))
+    return "herramientas";
+  if (t.includes("herramienta")) return "herramientas de mano";
+  if (t.includes("sold")) return "soldadoras";
+  if (t.includes("sople")) return "sopleteriaYReguladores";
+  if (t.includes("torcha") || t.includes("respuesto"))
+    return "torchasYRespuestos";
+  if (t.includes("varillas")) return "varillas";
+  if (t.includes("vial")) return "viales";
+
+  return null;
+};
+
+// ===============================
+// INICIALIZAR BÚSQUEDA GLOBAL
+// ===============================
 const inicializarBusquedaGlobal = () => {
   const searchForm = document.getElementById("searchForm");
   const searchInput = document.getElementById("searchInput");
 
-  if (!searchForm || !searchInput) {
-    return;
-  }
+  if (!searchForm || !searchInput) return;
 
   searchForm.addEventListener("submit", (e) => {
     e.preventDefault();
+
     const termino = searchInput.value.trim();
+    if (termino === "") return;
 
-    if (termino !== "") {
-      const resultados = buscarProductos(termino);
+    const resultados = buscarProductos(termino);
 
-      if (resultados.length > 0) {
-        alert("Producto encontrado: " + resultados[0].name);
+    // ✅ PRODUCTO ENCONTRADO
+    if (resultados.length > 0) {
+      const producto = resultados[0];
+
+      localStorage.setItem("buscarProductoId", producto.id);
+
+      const pagina = mapearCategoriaAPagina(producto.category);
+      window.location.href = `../PRODUCTS/${pagina}`;
+    }
+    // NO HAY PRODUCTO → IR A CATEGORÍA O VISTA GENERAL
+    else {
+      // Guardamos lo que buscó el usuario
+      const encoded = encodeURIComponent(termino);
+
+      // Intentar detectar categoría
+      const categoriaDetectada = detectarCategoriaDesdeTexto(termino);
+
+      if (categoriaDetectada) {
+        // 👉 Llevar a la categoría detectada
+        const pagina = mapearCategoriaAPagina(categoriaDetectada);
+        window.location.href = `../PRODUCTS/${pagina}`;
       } else {
-        alert("No se encontraron productos");
+        // 👉 No coincide con nada: vista general de productos
+        window.location.href = `../productos.html?fromSearch=1&q=${encoded}`;
       }
     }
   });
 };
 
-// Esperar a que el navBar cargue
+// ===============================
+// ESPERAR NAVBAR
+// ===============================
 setTimeout(() => {
-  const searchForm = document.getElementById("searchForm");
-  if (searchForm) {
+  if (document.getElementById("searchForm")) {
     inicializarBusquedaGlobal();
   }
 }, 1500);
 
-// Cargar componentes comunes
+// ===============================
+// COMPONENTES COMUNES
+// ===============================
 fetch("../navBar.html")
-  .then((response) => response.text())
-  .then((data) => {
-    document.getElementById("navBar").innerHTML = data;
-  })
-  .catch((error) => console.error("Error cargando el nav:", error));
+  .then((r) => r.text())
+  .then((html) => (document.getElementById("navBar").innerHTML = html));
 
 fetch("../whatsApp.html")
-  .then((response) => response.text())
-  .then((data) => {
-    document.getElementById("whatsApp").innerHTML = data;
-  })
-  .catch((error) => console.error("Error cargando el botón:", error));
+  .then((r) => r.text())
+  .then((html) => (document.getElementById("whatsApp").innerHTML = html));
 
 fetch("../footer.html")
-  .then((response) => response.text())
-  .then((data) => {
-    document.getElementById("footer").innerHTML = data;
-  })
-  .catch((error) => console.error("Error cargando el footer:", error));
-
- fetch("../cards.html")
-  .then((response) => response.text())
-  .then((data) => {
-    const cardsContainer = document.getElementById("cards");
-
-    if (!cardsContainer) {      
-      return;
-    }
-
-    cardsContainer.innerHTML = data;
-  })
-  .catch((error) => console.error("Error cargando las tarjetas:", error));
-
-
-// Solo ejecutar el efecto de escritura si el h1 contiene "CAZ" (página principal)
-let title = document.querySelector(".h1");
-if (
-  title &&
-  !title.textContent.includes("Alambres") &&
-  !title.textContent.includes("Electrodos") &&
-  !title.textContent.includes("Herramientas de mano") &&
-  !title.textContent.includes("Soldadoras") &&
-  !title.textContent.includes("Sopleteria & Reguladores") &&
-  !title.textContent.includes("Torchas & Respuestos")
-) {
-  let text = "CAZ Insumos Industriales";
-  let letterStart = 0;
-  let letterEnd = 1;
-  let write = setInterval(() => {
-    if (title) {
-      title.innerHTML = text.slice(letterStart, letterEnd);
-      letterEnd++;
-      if (letterEnd > text.length) {
-        letterEnd = 1;
-      }
-    }
-  }, 200);
-}
-
+  .then((r) => r.text())
+  .then((html) => (document.getElementById("footer").innerHTML = html));

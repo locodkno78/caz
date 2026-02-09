@@ -73,25 +73,22 @@ document.addEventListener("click", (e) => {
   if (!btn) return;
 
   document.getElementById("modalTitle").textContent = btn.dataset.name;
-  document.getElementById("modalDescription").textContent = btn.dataset.description;
+  document.getElementById("modalDescription").textContent =
+    btn.dataset.description;
   document.getElementById("modalCategory").textContent = btn.dataset.category;
   document.getElementById("modalStock").textContent = btn.dataset.stock;
 
   const carouselInner = document.getElementById("carouselInner");
   carouselInner.innerHTML = "";
 
-  [btn.dataset.img, btn.dataset.img2]
-    .filter(Boolean)
-    .forEach((img, index) => {
-      carouselInner.innerHTML += `
+  [btn.dataset.img, btn.dataset.img2].filter(Boolean).forEach((img, index) => {
+    carouselInner.innerHTML += `
         <div class="carousel-item ${index === 0 ? "active" : ""}">
           <img src="${img}" class="d-block w-100">
         </div>
       `;
-    });
+  });
 });
-
-
 
 // Filtrar productos por categoría
 const filtrarProductosPorCategoria = (todosLosProductos) => {
@@ -178,10 +175,10 @@ const cargarProductos = (array) => {
     return;
   }
 
-  array.forEach(producto => {
+  array.forEach((producto) => {
     const html = retornarCardHtml(producto);
     if (html) container.insertAdjacentHTML("beforeend", html);
-  }); 
+  });
 };
 
 // Inicializar búsqueda - AQUÍ SOLO RECARGAMOS LA VISTA ACTUAL
@@ -229,33 +226,63 @@ const scrollAlProducto = () => {
 // Inicializar la app
 const inicializarApp = async () => {
   try {
-    const snapshot = await getProduct()
+    const snapshot = await getProduct();
 
-    productos.length = 0 // limpiar array
+    productos.length = 0; // limpiar array
 
-    snapshot.forEach(doc => {
+    snapshot.forEach((doc) => {
       productos.push({
         id: doc.id,
-        ...doc.data()
-      })
-    })    
+        ...doc.data(),
+      });
+    });
 
     // Asegurar que el contenedor/modal existan en la página
     asegurarContenedorYModal();
 
-    const productosFiltrados = filtrarProductosPorCategoria(productos)
-    cargarProductos(productosFiltrados)
+    const productosFiltrados = filtrarProductosPorCategoria(productos);
+    cargarProductos(productosFiltrados);
 
-    scrollAlProducto()
+    // ===============================
+// MENSAJE SOLO SI VIENE DEL BUSCADOR
+// ===============================
+// ===============================
+// MENSAJE SOLO SI VIENE DEL BUSCADOR (URL)
+// ===============================
+const params = new URLSearchParams(window.location.search);
+const fromSearch = params.get("fromSearch");
+const query = params.get("q");
+
+if (fromSearch === "1" && query) {
+  const h1 = document.querySelector("h1");
+
+  if (h1) {
+    const aviso = document.createElement("div");
+    aviso.className = "alert alert-warning mt-3";
+    aviso.innerHTML = `
+      <strong>No encontramos resultados exactos para:</strong>
+      "<em>${decodeURIComponent(query)}</em>"<br>
+      Te mostramos productos similares 👇
+    `;
+
+    h1.insertAdjacentElement("afterend", aviso);
+  }
+
+  // 🔥 limpiar la URL (opcional pero PRO)
+  window.history.replaceState({}, document.title, window.location.pathname);
+}
+
+
+
+    scrollAlProducto();
 
     setTimeout(() => {
-      inicializarBusqueda()
-    }, 1000)
-
+      inicializarBusqueda();
+    }, 1000);
   } catch (error) {
-    console.error('❌ Error cargando productos:', error)
+    console.error("❌ Error cargando productos:", error);
   }
-}
+};
 
 // Solo ejecutar en páginas de productos
 if (esPaginaProductos()) {
