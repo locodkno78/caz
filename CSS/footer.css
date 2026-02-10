@@ -1,40 +1,50 @@
-/* Iconos de redes sociales */
-
-.instagram-icon {
-  background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  text-decoration: none;
-  transition: transform 0.3s ease, filter 0.3s ease;
-  display: inline-block;
+.footer-dark {
+  background: linear-gradient(
+    to bottom,
+    #0a0a0a 0%,
+    #1f1f1f 30%,
+    #2a2a2a 50%,
+    #1f1f1f 70%,
+    #0a0a0a 100%
+  );
+  box-shadow: 
+    0 -4px 12px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.8);
 }
 
-.instagram-icon:hover {
-  transform: scale(1.15);
-  filter: brightness(1.2);
+/* contenido */
+.footer-content {
+  max-width: 1200px;
+  margin: auto;
+  color: #ea7169;
+  font-family: "Playfair Display", serif;
 }
 
-.facebook-icon {
-  color: #1877f2;
-  text-decoration: none;
-  transition: transform 0.3s ease, filter 0.3s ease;
-  display: inline-block;
+.footer-address {
+  font-size: 0.9rem;
+  color: #9ca3af;
+  margin-bottom: 20px;
+}
+/* redes */
+.footer-social li {
+  margin: 0 12px;
 }
 
-.facebook-icon:hover {
-  transform: scale(1.15);
-  filter: brightness(1.2);
+.footer-social a {
+  color: #e5e5e5;
+  font-size: 1.8rem;
+  transition: all 0.3s ease;
 }
 
-.email-icon {
-  color: #EA4335;
-  text-decoration: none;
-  transition: transform 0.3s ease, filter 0.3s ease;
-  display: inline-block;
+.footer-social a:hover {
+  color: #ea7169;
+  transform: translateY(-4px);
 }
 
-.email-icon:hover {
-  transform: scale(1.15);
-  filter: brightness(1.2);
+/* copy */
+.footer-copy {
+  font-size: 0.85rem;
+  color: #9ca3af;
+  margin: 0;
 }

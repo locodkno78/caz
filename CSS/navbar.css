@@ -1,0 +1,54 @@
+/* NAVBAR CAZ */
+.navbar-caz {
+  background: linear-gradient(
+    to bottom,
+    #0a0a0a 0%,
+    #1f1f1f 30%,
+    #2a2a2a 50%,
+    #1f1f1f 70%,
+    #0a0a0a 100%
+  );
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Marca */
+.navbar-brand span {
+  font-family: "Playfair Display", serif;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+/* Hover elegante */
+.navbar-nav .nav-link {
+  position: relative;
+}
+
+.navbar-nav .nav-link::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #dc3545;
+  transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after {
+  width: 100%;
+}
+
+/* Dropdown con scroll */
+.dropdown-scroll {
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.fw-semibold {
+  font-family: "Playfair Display", serif;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
