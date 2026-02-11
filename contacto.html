@@ -13,78 +13,95 @@
   </head>
   <body class="contact">
     <div id="navBar"></div>
-    <div class="form">
-      <div class="row justify-content-center align-items-center min-vh-100">
-        <h2>Formulario de Consulta</h2>
-        <form
-          action="https://formsubmit.co/8309cbfa30b663b31f4c71e836176928"
-          method="POST"
-        >
-          <!-- Campo de Nombre -->
-          <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre</label>
-            <input
-              type="text"
-              class="form-control"
-              id="nombre"
-              placeholder="Ingrese su nombre"
-              name="name"
-              required
-            />
-          </div>
+    <div class="row justify-content-center align-items-center min-vh-100">
+      <div class="col-11 col-md-8 col-lg-6">
+        <div class="contact-card">
+          <h2 class="contact-title">Formulario de Consulta</h2>
 
-          <!-- Campo de Email -->
-          <div class="mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              placeholder="Ingrese su Email"
-              name="email"
-              required
-            />
-          </div>
-
-          <!-- Campo de Asunto -->
-          <div class="mb-3">
-            <label for="subject" class="form-label">Asunto</label>
-            <input
-              type="text"
-              class="form-control"
-              id="subject"
-              placeholder="Ingrese su número de teléfono"
-              required
-            />
-          </div>
-
-          <!-- Campo de Consulta -->
-          <div class="mb-3">
-            <label for="consulta" class="form-label">Consulta</label>
-            <textarea
-              class="form-control"
-              id="consulta"
-              rows="4"
-              placeholder="Escriba su consulta aquí..."
-              name="consulta"
-              required
-            ></textarea>
-          </div>
-          <!-- Botón de Enviar -->
-          <button
-            type="submit"
-            class="btn btn-light"
-            data-bs-toggle="tooltip"
-            title="Enviar consulta"
+          <form
+            action="https://formsubmit.co/d589ad93650ef43212b3e7b73a9945fe"
+            method="POST"
           >
-            Enviar
-          </button>
+            <!-- Nombre -->
+            <div class="mb-3">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input
+                type="text"
+                class="form-control"
+                id="nombre"
+                name="Nombre"
+                required
+              />
+            </div>
 
-          <input type="hidden" name="_next" value="http://127.0.0.1:5501" />
-          <input type="hidden" name="_captcha" value="false" />
-        </form>
+            <!-- Teléfono -->
+            <div class="mb-3">
+              <label for="telefono" class="form-label">Teléfono</label>
+              <input
+                type="tel"
+                class="form-control"
+                id="telefono"
+                name="Teléfono"
+                value="+54 9 "
+                maxlength="16"
+                
+              />
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                name="Email"
+                required
+              />
+            </div>
+
+            <!-- Asunto -->
+            <div class="mb-3">
+              <label for="subject" class="form-label">Asunto</label>
+              <input
+                type="text"
+                class="form-control"
+                id="subject"
+                name="Asunto"
+                required
+              />
+            </div>
+
+            <!-- Consulta -->
+            <div class="mb-4">
+              <label for="consulta" class="form-label">Consulta</label>
+              <textarea
+                class="form-control"
+                id="consulta"
+                rows="4"
+                name="Consulta"
+                required
+              ></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-danger w-100">
+              Enviar consulta
+            </button>
+
+            <input type="hidden" name="_next" value="http://127.0.0.1:5501" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input
+              type="hidden"
+              name="_subject"
+              value="Nueva consulta desde la web CAZ"
+            />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_replyto" value="%email%" />
+          </form>
+        </div>
       </div>
     </div>
+
     <div id="footer"></div>
     <div id="whatsApp"></div>
 
