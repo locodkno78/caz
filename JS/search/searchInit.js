@@ -22,7 +22,7 @@ export const inicializarBusquedaGlobal = () => {
       localStorage.setItem("buscarProductoId", producto.id);
 
       const pagina = mapearCategoriaAPagina(producto.category);
-      location.href = `../PRODUCTS/${pagina}`;
+      location.href = `./PRODUCTS/${pagina}`;
       return;
     }
 
@@ -30,9 +30,9 @@ export const inicializarBusquedaGlobal = () => {
     const encoded = encodeURIComponent(termino);
 
     if (categoria) {
-      location.href = `../PRODUCTS/${mapearCategoriaAPagina(categoria)}`;
+      location.href = `./PRODUCTS/${mapearCategoriaAPagina(categoria)}`;
     } else {
-      location.href = `../productos.html?fromSearch=1&q=${encoded}`;
+      location.href = `./productos.html?fromSearch=1&q=${encoded}`;
     }
   });
 };
