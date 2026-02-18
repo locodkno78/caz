@@ -61,3 +61,5 @@ This site displays the products sold by the company, organized by categories. Ea
 - Contact form that sends inquiries to the company’s email  
 - Access to social media (Instagram and Facebook)  
 - “About Us” section with company information  
+
+Linkedin: www.linkedin.com/in/alberto-santiago-di-colantonio-90ba561b3
