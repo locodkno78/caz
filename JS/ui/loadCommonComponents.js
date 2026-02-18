@@ -9,10 +9,10 @@ const load = async (id, file) => {
 
 export const cargarComponentesComunes = async () => {
   await Promise.all([
-    load("navBar", "../navBar.html"),
-    load("whatsApp", "../whatsApp.html"),
-    load("footer", "../footer.html"),
-    load("cards", "../../cards.html"),
+    load("navBar", "./COMPONENTS/navBar.html"),
+    load("whatsApp", "./COMPONENTS/whatsApp.html"),
+    load("footer", "./COMPONENTS/footer.html"),
+    load("cards", "./COMPONENTS/cards.html"),
   ]);
 };
 
