@@ -1,8 +1,11 @@
 const load = async (id, file) => {
+  const container = document.getElementById(id);
+  if (!container) return; // 👈 evita el error
+
   const res = await fetch(file);
-  const html = await res.text();
-  document.getElementById(id).innerHTML = html;
+  container.innerHTML = await res.text();
 };
+
 
 export const cargarComponentesComunes = async () => {
   await Promise.all([
