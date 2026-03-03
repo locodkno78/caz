@@ -244,35 +244,30 @@ const inicializarApp = async () => {
     cargarProductos(productosFiltrados);
 
     // ===============================
-// MENSAJE SOLO SI VIENE DEL BUSCADOR
-// ===============================
-// ===============================
-// MENSAJE SOLO SI VIENE DEL BUSCADOR (URL)
-// ===============================
-const params = new URLSearchParams(window.location.search);
-const fromSearch = params.get("fromSearch");
-const query = params.get("q");
+    // MENSAJE SOLO SI VIENE DEL BUSCADOR
+    // ===============================
+    const params = new URLSearchParams(window.location.search);
+    const fromSearch = params.get("fromSearch");
+    const query = params.get("q");
 
-if (fromSearch === "1" && query) {
-  const h1 = document.querySelector("h1");
+    if (fromSearch === "1" && query) {
+      const h1 = document.querySelector("h1");
 
-  if (h1) {
-    const aviso = document.createElement("div");
-    aviso.className = "alert alert-warning mt-3";
-    aviso.innerHTML = `
+      if (h1) {
+        const aviso = document.createElement("div");
+        aviso.className = "alert alert-warning mt-3";
+        aviso.innerHTML = `
       <strong>No encontramos resultados exactos para:</strong>
       "<em>${decodeURIComponent(query)}</em>"<br>
       Te mostramos productos similares 👇
     `;
 
-    h1.insertAdjacentElement("afterend", aviso);
-  }
+        h1.insertAdjacentElement("afterend", aviso);
+      }
 
-  // 🔥 limpiar la URL (opcional pero PRO)
-  window.history.replaceState({}, document.title, window.location.pathname);
-}
-
-
+      // 🔥 limpiar la URL (opcional pero PRO)
+      window.history.replaceState({}, document.title, window.location.pathname);
+    }
 
     scrollAlProducto();
 
