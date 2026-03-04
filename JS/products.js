@@ -3,11 +3,6 @@ import { getProduct } from "./firebase.js";
 // Productos en memoria
 const productos = [];
 
-const obtenerProductoDesdeURL = () => {
-  const params = new URLSearchParams(window.location.search);
-  return params.get("productId");
-};
-
 // Normalizar texto para comparar categorías (quita tildes, minusculas y espacios extras)
 const normalize = (str = "") =>
   str
@@ -20,12 +15,9 @@ const normalize = (str = "") =>
 
 // Detectar si la página es de productos: SOLO si está en la carpeta /products/
 const esPaginaProductos = () => {
-  const path = window.location.pathname.toLowerCase();
-  return (
-    path.includes("/products/") ||
-    path.endsWith("/productos.html") ||
-    path.endsWith("/productos")
-  );
+  const path = window.location.pathname || "";
+  // Solo ejecutar si la ruta incluye /products/ (excluye index, productos.html, etc)
+  return path.toLowerCase().includes("/products/");
 };
 
 // Obtener la categoría del título de la página
@@ -211,9 +203,7 @@ const inicializarBusqueda = () => {
 
 // Función para hacer scroll al producto encontrado
 const scrollAlProducto = () => {
-  const params = new URLSearchParams(window.location.search);
-  const productoId =
-    params.get("productId") || localStorage.getItem("buscarProductoId");
+  const productoId = localStorage.getItem("buscarProductoId");
   if (productoId) {
     // Esperar a que se carguen las imágenes
     setTimeout(() => {
@@ -250,22 +240,8 @@ const inicializarApp = async () => {
     // Asegurar que el contenedor/modal existan en la página
     asegurarContenedorYModal();
 
-    const productId = obtenerProductoDesdeURL();
-
-    if (productId) {
-      // 🔥 Caso: venimos del buscador a un producto puntual
-      const producto = productos.find((p) => p.id === productId);
-
-      if (producto) {
-        cargarProductos([producto]);
-      } else {
-        cargarProductos(productos);
-      }
-    } else {
-      // 📦 Caso normal: filtrar por categoría
-      const productosFiltrados = filtrarProductosPorCategoria(productos);
-      cargarProductos(productosFiltrados);
-    }
+    const productosFiltrados = filtrarProductosPorCategoria(productos);
+    cargarProductos(productosFiltrados);
 
     // ===============================
     // MENSAJE SOLO SI VIENE DEL BUSCADOR
