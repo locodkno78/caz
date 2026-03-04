@@ -6,8 +6,14 @@ import { buscarProductos } from "./productSearch.js";
 import { mapearCategoriaAPagina } from "./categoryMapper.js";
 import { detectarCategoriaDesdeTexto } from "./categoryDetector.js";
 
-// 🔧 BASE del proyecto (GitHub Pages / local)
-const BASE_PATH = "/caz";
+// 🔧 Detectar BASE_PATH automáticamente
+const obtenerBasePath = () => {
+  const baseMeta = document.querySelector('base');
+  if (baseMeta?.href) {
+    return baseMeta.href.replace(window.location.origin, '').replace(/\/$/, '');
+  }
+  return "";
+};
 
 export const inicializarBusquedaGlobal = () => {
   const form = document.getElementById("searchForm");
@@ -36,6 +42,8 @@ export const inicializarBusquedaGlobal = () => {
 function ejecutarBusqueda(valor) {
   const termino = valor.trim();
   if (!termino) return;
+
+  const BASE_PATH = obtenerBasePath();
 
   // 1️⃣ Buscar producto directo
   const resultados = buscarProductos(termino);
