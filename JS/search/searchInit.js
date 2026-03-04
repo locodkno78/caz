@@ -1,10 +1,8 @@
 // ===============================
-// Buscador global — versión ROBUSTA
+// Buscador global — versión PRO REAL
 // ===============================
 
 import { buscarProductos } from "./productSearch.js";
-
-const BASE_PATH = "/caz";
 
 export const inicializarBusquedaGlobal = () => {
   const form = document.getElementById("searchForm");
@@ -31,15 +29,19 @@ function ejecutarBusqueda(valor) {
 
   const resultados = buscarProductos(termino);
 
-  // 👉 Si existe producto → mandamos su ID
+  // 🔥 Detectar base path automáticamente (GitHub Pages safe)
+  const basePath = window.location.pathname.includes("/caz/")
+    ? "/caz"
+    : "";
+
+  // 👉 Si existe producto → ir directo al producto
   if (resultados.length) {
     const producto = resultados[0];
-
-    window.location.href = `${BASE_PATH}/productos.html?productId=${producto.id}`;
+    window.location.href = `${basePath}/productos.html?productId=${producto.id}`;
     return;
   }
 
-  // 👉 Si NO existe → mandamos búsqueda general
+  // 👉 Si NO existe → búsqueda general
   const encoded = encodeURIComponent(termino);
-  window.location.href = `${BASE_PATH}/productos.html?q=${encoded}`;
+  window.location.href = `${basePath}/productos.html?fromSearch=1&q=${encoded}`;
 }
