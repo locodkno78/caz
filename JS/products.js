@@ -20,9 +20,12 @@ const normalize = (str = "") =>
 
 // Detectar si la página es de productos: SOLO si está en la carpeta /products/
 const esPaginaProductos = () => {
-  const path = window.location.pathname || "";
-  // Solo ejecutar si la ruta incluye /products/ (excluye index, productos.html, etc)
-  return path.toLowerCase().includes("/products/");
+  const path = window.location.pathname.toLowerCase();
+  return (
+    path.includes("/products/") ||
+    path.endsWith("/productos.html") ||
+    path.endsWith("/productos")
+  );
 };
 
 // Obtener la categoría del título de la página
