@@ -1,8 +1,12 @@
 // ===============================
-// Buscador global — versión PRO REAL
+// Buscador global — versión FINAL PRO
 // ===============================
 
 import { buscarProductos } from "./productSearch.js";
+
+// 🔥 Detectar base path (GitHub Pages / local)
+const getBasePath = () =>
+  window.location.pathname.includes("/caz/") ? "/caz" : "";
 
 export const inicializarBusquedaGlobal = () => {
   const form = document.getElementById("searchForm");
@@ -28,20 +32,29 @@ function ejecutarBusqueda(valor) {
   if (!termino) return;
 
   const resultados = buscarProductos(termino);
+  const basePath = getBasePath();
 
-  // 🔥 Detectar base path automáticamente (GitHub Pages safe)
-  const basePath = window.location.pathname.includes("/caz/")
-    ? "/caz"
-    : "";
-
-  // 👉 Si existe producto → ir directo al producto
+  // 👉 SI EXISTE PRODUCTO
   if (resultados.length) {
     const producto = resultados[0];
-    window.location.href = `${basePath}/productos.html?productId=${producto.id}`;
+
+    // 🔥 mapear categoría a HTML (simple y seguro)
+    const categoriaSlug = producto.category
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/\p{Diacritic}/gu, "")
+      .replace(/\s+/g, "")
+      .replace(/[^\w-]/g, "");
+
+    // 👉 guardamos ID para que products.js lo marque
+    localStorage.setItem("buscarProductoId", producto.id);
+
+    // 👉 ir a la página de la categoría
+    window.location.href = `${basePath}/PRODUCTS/${categoriaSlug}.html`;
     return;
   }
 
-  // 👉 Si NO existe → búsqueda general
+  // 👉 SI NO EXISTE → productos generales
   const encoded = encodeURIComponent(termino);
   window.location.href = `${basePath}/productos.html?fromSearch=1&q=${encoded}`;
 }
