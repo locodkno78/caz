@@ -19,6 +19,12 @@ export const detectarCategoriaDesdeTexto = (texto = "") => {
   if (t.includes("gas")) return "gases";
   if (t.includes("gomeri")) return "gomeria";
   if (t.includes("herramienta")) return "herramientas";
+  if (t.includes("horno")) return "hornos";
+  if (t.includes("izaje")) return "izajes";
+  if (t.includes("panel")) return "paneles";
+  if (t.includes("protec")) return "proteccion";
+  if (t.includes("regulador")) return "reguladores";
+  if (t.includes("resorte")) return "resortes";
   if (t.includes("sold")) return "soldadoras";
   if (t.includes("sople")) return "sopleteriaYReguladores";
   if (t.includes("torcha") || t.includes("respuesto"))

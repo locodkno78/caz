@@ -4,7 +4,7 @@ const MAP_CATEGORIA_PAGINA = {
   accesorios: "accesorios.html",
   alambres: "alambres.html",
   auxiliares: "auxiliares.html",
-  calefactores: "calefactores.html",
+  calefactores: "calefactor.html",
   cintas: "cintas.html",
   compresores: "compresores.html",
   consumibles: "consumibles.html",
@@ -31,4 +31,4 @@ const MAP_CATEGORIA_PAGINA = {
 };
 
 export const mapearCategoriaAPagina = (categoria = "") =>
-  MAP_CATEGORIA_PAGINA[categoria.toLowerCase()] || "index.html";
+  MAP_CATEGORIA_PAGINA[categoria.toLowerCase()] || "productos.html";
