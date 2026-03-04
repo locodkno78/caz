@@ -1,4 +1,4 @@
-// Categoría → página
+// categoryMapper.js
 
 const MAP_CATEGORIA_PAGINA = {
   accesorios: "accesorios.html",
@@ -24,11 +24,23 @@ const MAP_CATEGORIA_PAGINA = {
   reguladores: "reguladores.html",
   resortes: "resortes.html",
   soldadoras: "soldadoras.html",
-  sopleteriaYReguladores: "sopleteria.html",
-  torchasYRespuestos: "torchas.html",
+  sopleteriayreguladores: "sopleteria.html",
+  torchesyrepuestos: "torchas.html",
   varillas: "varillas.html",
   viales: "viales.html",
 };
 
-export const mapearCategoriaAPagina = (categoria = "") =>
-  MAP_CATEGORIA_PAGINA[categoria.toLowerCase()] || "index.html";
+// 🔥 normalización REAL
+export const normalizar = (str = "") =>
+  str
+    .toString()
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .replace(/[^\w\s]/g, "")
+    .trim()
+    .toLowerCase();
+
+export const mapearCategoriaAPagina = (categoria = "") => {
+  const key = normalizar(categoria);
+  return MAP_CATEGORIA_PAGINA[key] || null;
+};
