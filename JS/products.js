@@ -181,25 +181,7 @@ const cargarProductos = (array) => {
   });
 };
 
-// Inicializar búsqueda - AQUÍ SOLO RECARGAMOS LA VISTA ACTUAL
-const inicializarBusqueda = () => {
-  const searchForm = document.getElementById("searchForm");
-  const searchInput = document.getElementById("searchInput");
 
-  if (!searchForm || !searchInput) {
-    return;
-  }
-
-  searchForm.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const termino = searchInput.value.trim();
-
-    if (termino === "") {
-      const productosFiltrados = filtrarProductosPorCategoria(productos);
-      cargarProductos(productosFiltrados);
-    }
-  });
-};
 
 // Función para hacer scroll al producto encontrado
 const scrollAlProducto = () => {
@@ -270,10 +252,6 @@ const inicializarApp = async () => {
     }
 
     scrollAlProducto();
-
-    setTimeout(() => {
-      inicializarBusqueda();
-    }, 1000);
   } catch (error) {
     console.error("❌ Error cargando productos:", error);
   }
