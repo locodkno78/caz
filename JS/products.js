@@ -222,7 +222,7 @@ const inicializarApp = async () => {
   try {
     const snapshot = await getProduct();
 
-    productos.length = 0; // limpiar array
+    productos.length = 0;
 
     snapshot.forEach((doc) => {
       const data = doc.data();
@@ -230,28 +230,29 @@ const inicializarApp = async () => {
       productos.push({
         id: doc.id,
         ...data,
-        img: data.img || "../IMG/no-image.png",
-        img2: data.img2 || "",
+        img: data.img || null,
+        img2: data.img2 || null,
       });
     });
-    productos.forEach((p) => {
-      if (!p.img) {
-        console.warn("⚠️ Producto sin imagen:", p);
-      }
-    });
 
-    // Asegurar que el contenedor/modal existan en la página
+    // Asegurar contenedor/modal
     asegurarContenedorYModal();
 
-    const productosFiltrados = filtrarProductosPorCategoria(productos);
+    // ✅ FILTRAR POR CATEGORÍA + IMÁGENES VÁLIDAS
+    const productosFiltrados = filtrarProductosPorCategoria(productos)
+      .filter(p => p.img && p.img.startsWith("http"));
 
-    // 👇 PRELOAD
+    console.log("TOTAL:", productos.length);
+    console.log("FILTRADOS OK:", productosFiltrados.length);
+
+    // 👇 PRELOAD SOLO DE LOS BUENOS
     await Promise.all(productosFiltrados.map((p) => preloadImage(p.img)));
 
+    // 👇 RENDER SOLO DE LOS BUENOS
     cargarProductos(productosFiltrados);
 
     // ===============================
-    // MENSAJE SOLO SI VIENE DEL BUSCADOR
+    // MENSAJE BUSCADOR
     // ===============================
     const params = new URLSearchParams(window.location.search);
     const fromSearch = params.get("fromSearch");
@@ -264,15 +265,14 @@ const inicializarApp = async () => {
         const aviso = document.createElement("div");
         aviso.className = "alert alert-warning mt-3";
         aviso.innerHTML = `
-      <strong>No encontramos resultados exactos para:</strong>
-      "<em>${decodeURIComponent(query)}</em>"<br>
-      Te mostramos productos similares 👇
-    `;
+          <strong>No encontramos resultados exactos para:</strong>
+          "<em>${decodeURIComponent(query)}</em>"<br>
+          Te mostramos productos similares 👇
+        `;
 
         h1.insertAdjacentElement("afterend", aviso);
       }
 
-      // 🔥 limpiar la URL (opcional pero PRO)
       window.history.replaceState({}, document.title, window.location.pathname);
     }
 
