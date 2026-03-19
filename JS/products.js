@@ -1,5 +1,14 @@
 import { getProduct } from "./firebase.js";
 
+const preloadImage = (src) => {
+  return new Promise((resolve) => {
+    const img = new Image();
+    img.src = src;
+    img.onload = resolve;
+    img.onerror = resolve;
+  });
+};
+
 // Productos en memoria
 const productos = [];
 
@@ -35,7 +44,12 @@ const obtenerCategoriaActual = () => {
 const retornarCardHtml = (producto) => {
   return `
     <div class="card bg-dark text-white" id="producto-${producto.id}">
-      <img src="${producto.img}" class="img-thumbnail w-100">
+      <img 
+        src="${producto.img}" 
+        class="img-thumbnail w-100"
+        loading="lazy"
+        onerror="this.onerror=null; this.src='../IMG/no-image.png';"
+      >
       <div class="card-name">${producto.name}</div>
       <div class="card-description">${producto.characteristics}</div>
       <div class="card-category">Categoría: ${producto.category}</div>
@@ -181,8 +195,6 @@ const cargarProductos = (array) => {
   });
 };
 
-
-
 // Función para hacer scroll al producto encontrado
 const scrollAlProducto = () => {
   const productoId = localStorage.getItem("buscarProductoId");
@@ -213,16 +225,29 @@ const inicializarApp = async () => {
     productos.length = 0; // limpiar array
 
     snapshot.forEach((doc) => {
+      const data = doc.data();
+
       productos.push({
         id: doc.id,
-        ...doc.data(),
+        ...data,
+        img: data.img || "../IMG/no-image.png",
+        img2: data.img2 || "",
       });
+    });
+    productos.forEach((p) => {
+      if (!p.img) {
+        console.warn("⚠️ Producto sin imagen:", p);
+      }
     });
 
     // Asegurar que el contenedor/modal existan en la página
     asegurarContenedorYModal();
 
     const productosFiltrados = filtrarProductosPorCategoria(productos);
+
+    // 👇 PRELOAD
+    await Promise.all(productosFiltrados.map((p) => preloadImage(p.img)));
+
     cargarProductos(productosFiltrados);
 
     // ===============================
