@@ -48,7 +48,7 @@ const retornarCardHtml = (producto) => {
         src="${producto.img}" 
         class="img-thumbnail w-100"
         loading="lazy"
-        onerror="this.onerror=null; this.src='/caz/IMG/no-image.png';"
+        onerror="this.onerror=null; this.src='https://via.placeholder.com/300x300?text=Sin+Imagen';"
       >
       <div class="card-name">${producto.name}</div>
       <div class="card-description">${producto.characteristics}</div>
@@ -239,8 +239,15 @@ const inicializarApp = async () => {
     asegurarContenedorYModal();
 
     // ✅ FILTRAR POR CATEGORÍA + IMÁGENES VÁLIDAS
-    const productosFiltrados = filtrarProductosPorCategoria(productos)
-      .filter(p => p.img && p.img.startsWith("http"));
+    const productosFiltrados = filtrarProductosPorCategoria(productos).map(
+      (p) => ({
+        ...p,
+        img:
+          p.img && p.img.startsWith("http")
+            ? p.img
+            : "https://via.placeholder.com/300x300?text=Sin+Imagen",
+      }),
+    );
 
     console.log("TOTAL:", productos.length);
     console.log("FILTRADOS OK:", productosFiltrados.length);
