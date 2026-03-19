@@ -48,7 +48,7 @@ const retornarCardHtml = (producto) => {
         src="${producto.img}" 
         class="img-thumbnail w-100"
         loading="lazy"
-        onerror="this.onerror=null; this.src='../IMG/no-image.png';"
+        onerror="this.src='/caz/IMG/no-image.png';"
       >
       <div class="card-name">${producto.name}</div>
       <div class="card-description">${producto.characteristics}</div>
